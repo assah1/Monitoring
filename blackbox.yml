@@ -1,0 +1,41 @@
+---
+modules:
+  check_http:
+    prober: http
+    timeout: 5s
+    http:
+      valid_status_codes: [200, 299, 300, 399] 
+      valid_http_versions: ["HTTP/1.1", "HTTP/2"]
+      method: GET
+      headers:
+        User-Agent: "Blackbox Exporter"
+      follow_redirects: true
+      tls_config:
+        insecure_skip_verify: false
+
+  check_tcp:
+    prober: tcp
+    timeout: 5s
+    tcp:
+      preferred_ip_protocol: ip4
+      query_response:
+        - expect: ".*"
+          send: "Hello"
+
+  check_dns:
+    prober: dns
+    timeout: 5s
+    dns:
+      preferred_ip_protocol: ip4
+      query_name: "ptsecurity.com"
+      query_type: "A"
+      valid_rcodes:
+        - NOERROR
+
+  check_icmp:
+    prober: icmp
+    timeout: 5s
+    icmp:
+      preferred_ip_protocol: ip4
+      payload_size: 64
+      ttl: 64
