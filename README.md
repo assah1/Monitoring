@@ -1,5 +1,5 @@
 # Задание №3 Мониторинг доступности ptsecurity.com
-## Ссылка на публичный Git-репозиторий, содержащий файлы конфигурации Prometheus и Blackbox exporter с настройками сбора метрик доступности "https://ptsecurity. com"
+## Ссылка на публичный Git-репозиторий, содержащий файлы конфигурации Prometheus и Blackbox exporter с настройками сбора метрик доступности ["https://ptsecurity.com"](https://ptsecurity.com)
 
 ## Описание
 Эта документ описывает настройки конфигураций для мониторинга доступности сайта с помощью Prometheus и Blackbox Exporter.
