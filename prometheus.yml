@@ -1,0 +1,64 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'http_blackbox'
+    metrics_path: /probe
+    params:
+      module: [check_http]
+    static_configs:
+      - targets:
+        - https://ptsecurity.com
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - target_label: __address__
+        replacement: 127.0.0.1:9115
+      - source_labels: [__param_target]
+        target_label: instance
+
+  - job_name: 'tcp_blackbox'
+    metrics_path: /probe
+    params:
+      module: [check_tcp]
+    static_configs:
+      - targets:
+        - ptsecurity.com:443
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - target_label: __address__
+        replacement: 127.0.0.1:9115
+      - source_labels: [__param_target]
+        target_label: instance
+
+  - job_name: 'dns_blackbox'
+    metrics_path: /probe
+    params:
+      module: [check_dns]
+    static_configs:
+      - targets:
+        - ptsecurity.com
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - target_label: __address__
+        replacement: 127.0.0.1:9115
+      - source_labels: [__param_target]
+        target_label: instance
+
+  - job_name: 'icmp_blackbox'
+    metrics_path: /probe
+    params:
+      module: [check_icmp]
+    static_configs:
+      - targets:
+        - ptsecurity.com
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - target_label: __address__
+        replacement: 127.0.0.1:9115
+      - source_labels: [__param_target]
+        target_label: instance
+
